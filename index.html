@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人数据展示</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+        .explain {
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgb(0 0 0 / 5%);
+        }
+    </style>
+</head>
+<body>
+<div class="explain">
+    <div id="main" style="width: 600px;height:600px;"></div>
+    <div id="main1" style="width: 900px;height:600px;"></div>
+</div>
+</body>
+<script crossorigin="anonymous" integrity="sha512-UPyb2BYzA8+RK2GwoE1bDs3cha2cQvDdR3n+m7B8jl4f/nRzNw47Cq3w0S28BVysrMJ9LoG94SyvXNZd8HN3yg==" src="https://lib.baomitu.com/echarts/5.1.0/echarts.js"></script>
+<script>
+    window.onload = () => {
+        getList();
+        getList1();
+    };
+
+    function getList() {
+        let myChart = echarts.init(document.getElementById('main'), 'light');
+        let option = {
+            title: {
+                text: '参与项目组的情况',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "在【{b}】待了：{c}年",
+                axisPointer: {
+                    type: 'cross'
+                },
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+            },
+            series: [
+                {
+                    name: '时间年限',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {value: 2.5, name: 'OA项目组'},
+                        {value: 1.2, name: '智能工作台项目组'},
+                        {value: 0.3, name: '财务开票项目组'},
+                        {value: 0.2, name: '易单来项目组'}
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        }
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+    }
+
+    function getList1() {
+        let myChart = echarts.init(document.getElementById('main1'), 'light');
+        let option = {
+            title: {
+                text: '参与开发过的项目情况（包括大致开发了多少页面）',
+                subtext: '',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "在【{b}】中开发了：{c}个页面",
+                axisPointer: {
+                    type: 'cross'
+                },
+            },
+            xAxis: {
+                type: 'category',
+                data: ['OA运营端', '员工管理', '内部管理', '易单来项目', '财务管理', '东经易网web端']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [30, 11, 15, 10, 9, 6],
+                type: 'bar',
+                showBackground: true,
+                backgroundStyle: {
+                    color: 'rgba(180, 180, 180, 0.2)'
+                }
+            }]
+        };
+        myChart.setOption(option);
+    }
+</script>
+</html>
